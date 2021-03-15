@@ -4,33 +4,33 @@ import javax.swing.JOptionPane;
 
 public class Iniciador {
 
-	static String[] intArr0 = { " -", "-", "-", "-", "-", "-", "-", "-" };
-	static String[] intArr1 = { " - ", "|", "|", "|", "|", "|", " -" };
-	static String[] intArr2 = { " - ", " ", "|", "|", "|", " ", " -" };
-	static String[] intArr3 = { " - ", " ", " ", "|", " ", " ", " -" };
-	static String[] intArr4 = { " -", "-", "-", "-", "-", "-", "-", "-" };
+	static String[] intArr0 = { "  -", "-", "-", "-", "-", "-", "-", "-" };
+	static String[] intArr1 = { "  - ", "|", "|", "|", "|", "|", " -" };
+	static String[] intArr2 = { "  - ", " ", "|", "|", "|", " ", " -" };
+	static String[] intArr3 = { "  - ", " ", " ", "|", " ", " ", " -" };
+	static String[] intArr4 = { "  -", "-", "-", "-", "-", "-", "-", "-" };
 
 	static int contador;
 	static int PntTotal;
 	static int NTiradas = 0;
-	static int InputString;
-	static int TiradasPermitidas = 5;
-
-	public static void main(String[] args) {
-
-		int NBolos = 9;
+	static int InputInt;
+	static int InputParty;
+	static int TiradasPermitidas = 3;
+	static int NBolos = 9;
+	
+	
+	public static void main(String[] args) {	
 
 		System.out.println("     BOLERA!!\n");
 
 		Iniciador.PrintMap();
-		System.out.println("\n        " + NTiradas);
 
 		TiradasPermitidas++;
 
 		for (; contador != NBolos; NTiradas++) {
 
 			if (NTiradas == TiradasPermitidas && contador != NBolos) {
-				System.out.println("Se te han acabado los tiros vuelve a intentarlo más tarde.");
+				System.out.println("Se te han acabado los \ntiros, vuelve a intentarlo \n     más tarde.");
 				break;
 			}
 
@@ -55,20 +55,21 @@ public class Iniciador {
 				}
 			}
 
-			if (InputString == 1) {
+			if (InputInt == 1) {
 				System.out.println("\n");
 				Iniciador.PrintMap();
 				Iniciador.Contador();
-				System.out.println("\n        " + NTiradas + "\n\n");
+				System.out.println("\n      Ronda " + NTiradas + "\n\n");
 			} else {
 				break;
 			}
 		}
-		if (InputString == 1 && NTiradas <= TiradasPermitidas && contador == NBolos) {
+		if (InputInt == 1 && NTiradas <= TiradasPermitidas && contador == NBolos) {
 			Iniciador.Pnt();
-			System.out.println("\nFelicidades!!" + "\nHas conseguido " + PntTotal + " puntos!!");
+			System.out.println(
+					"\n    Felicidades!!" + "\nHas conseguido " + PntTotal + " puntos!!" + "\n     ~YOU WIN!!~");
 		} else {
-			System.out.println("Perdedor.");
+			System.out.println("    ~YOU LOSE~");
 		}
 	}
 
@@ -153,22 +154,31 @@ public class Iniciador {
 		if (NTiradas >= 1) {
 			do {
 
-				InputString = Integer
-						.parseInt(JOptionPane.showInputDialog("¿Quieres volver a tirar?"
-								+ " [1 -> Si // 0 -> No]: "));
+				InputInt = Integer
+						.parseInt(JOptionPane.showInputDialog("¿Quieres volver a tirar?" + " [1 -> Si // 0 -> No]: "));
 
-				if (InputString != 1 & InputString != 0) {
+				if (InputInt != 1 & InputInt != 0) {
 					System.out.println("No te entiendo, te volvere a preguntar.");
 				}
-				if (InputString == 1) {
-					System.out.println("    JUGUEMOS!!" + "\nTe quedan " 
-				+ ((TiradasPermitidas -1) - NTiradas) + " tiradas.");
-					break;
-				} else {
-					System.out.println("Como quieras.");
+				if (InputInt == 1) {
+					if (((TiradasPermitidas - 1) - NTiradas) > 0) {
+						
+						for (int i = 0; i <= 15; i++) {
+							System.out.println("\n");
+						}
+						System.out.println(
+								"    JUGUEMOS!!" + "\nTe quedan " + ((TiradasPermitidas - 1) - NTiradas) + " tiradas.");
+						break;
+					} else {
+						System.out.println("    JUGUEMOS!!" + "\nEsta será tu última ronda\n     SUERTE!!");
+						break;
+					}
+				}
+				if (InputInt == 0) {
+					System.out.println("   Como quieras.");
 					break;
 				}
-			} while (InputString != 1);
+			} while (InputInt != 1);
 		}
 
 		if (NTiradas == 0) {
@@ -176,22 +186,27 @@ public class Iniciador {
 
 				NTiradas++;
 
-				InputString = Integer
-						.parseInt(JOptionPane.showInputDialog("¿Quieres jugar? "
-								+ "[1 -> Si // 0 -> No]: "));
-				
-				if (InputString != 1 & InputString != 0) {
-					System.out.println("No te entiendo, te volvere a preguntar.");
+				InputInt = Integer.parseInt(
+						JOptionPane.showInputDialog("¿Quieres comenzar tu primera ronda? " + "[1 -> Si // 0 -> No]: "));
+
+				if (InputInt != 1 & InputInt != 0) {
+					System.out.println("\nNo te entiendo, te volvere a preguntar.");
 				}
-				if (InputString == 1) {
-					System.out.println("    A JUGAR!!" + "\nComo máximo tendras " 
-				+ (TiradasPermitidas -1) + "\ntiradas para intentarlo.");
-					break;
-				} else {
-					System.out.println("Como quieras.");
+				if (InputInt == 1) {
+					
+					for (int i = 0; i <= 15; i++) {
+						System.out.println("\n");
+					}
+					
+					System.out.println("\n\n" + "    A JUGAR!!" + "\nComo máximo tendras " + (TiradasPermitidas - 1)
+							+ "\nrondas para intentarlo.");
 					break;
 				}
-			} while (InputString != 1);
+				if (InputInt == 0) {
+					System.out.println("\n\n   Como quieras.");
+					break;
+				}
+			} while (InputInt != 1);
 		}
 	}
 }
