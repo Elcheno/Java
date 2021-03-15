@@ -14,7 +14,6 @@ public class Iniciador {
 	static int PntTotal;
 	static int NTiradas = 0;
 	static int InputInt;
-	static int InputParty;
 	static int TiradasPermitidas = 3;
 	static int NBolos = 9;
 	
