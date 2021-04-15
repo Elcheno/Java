@@ -1,0 +1,149 @@
+package DB;
+
+import javax.swing.JOptionPane;
+
+public class main {
+	
+	static String[][] BD = new String[1000][5];
+	static String[] menu = {"SET", "GET", "EXIT"}; 
+	static String[] matriz = {"Perro", "Gato", "Cobaya", "Pingüino"};
+	
+	static int z;
+	static int s = 0;
+	static int a;
+	
+	static int menuOption;
+	static String inputName;
+	static String inputAge;
+	static String inputHeight;
+	
+///////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////	
+	
+	public static void main(String[] args) {
+				
+		menu1();
+	}
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public static int menu1() {
+		
+		menuOption = JOptionPane.showOptionDialog(null, "SELECCIONA UNA OPCION", 
+				"SELECIONADOR", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, 
+				null, menu, menu[0]);
+		
+		if (menuOption == 2 || menuOption == -1) {
+			System.exit(0);
+		}
+		
+		if (menuOption == 0) {
+			BD1();
+		}
+		
+		return menuOption;	
+	}
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public static void BD1() {
+				
+		for (a = s;; a++) {
+			
+			String species = (String) JOptionPane.showInputDialog(null, "Selecione una especie", "Seleccionador", JOptionPane.DEFAULT_OPTION, null, matriz, matriz[0]);
+			
+			String codigo = Integer.toString(a);
+			
+			Animal animal = new Animal();
+			animal.setEspecie(species);
+			animal.setCod(codigo);
+			z = 0;
+			BD[a][z] = codigo;
+			
+			System.out.print("| " + BD[a][z]);
+			
+			z = 1;
+			BD[a][z] = species;
+			
+			System.out.print(" | " + BD[a][z]);
+			
+			do {
+				
+				inputName = JOptionPane.showInputDialog("Introduce el nombre del animal: ");
+				
+				if (inputName.length() == 0) {
+					inputName = "null";
+				}
+				
+				if (inputName.length() > 15) {
+					JOptionPane.showMessageDialog(null, "Nombre demasiado largo");
+				}
+				
+				if (inputName.length() > 0 && inputName.length() < 5) {
+					break;
+				}
+				
+				}while(true);
+			animal.setNombre(inputName);
+			z = 2;
+			BD[a][z] = inputName;
+			System.out.print(" | " + BD[a][z]);
+			
+			do {
+				
+				inputAge = JOptionPane.showInputDialog("Introduce la edad del animal: ");
+				
+				if (inputAge.length() == 0) {
+					inputAge = "null";
+				}
+				
+				if (inputAge.length() > 3) {
+					JOptionPane.showMessageDialog(null, "Edad demasiado larga");
+				}
+				
+				if (inputAge.length() > 0 && inputAge.length() < 5) {
+					break;
+				}
+				
+			}while(true);	
+			animal.setEdad(inputAge);
+			z = 3;
+			BD[a][z] = inputAge;
+			System.out.print(" | " + BD[a][z] + " años");
+			
+			
+			do {
+				
+				inputHeight = JOptionPane.showInputDialog("Introduce el peso del animal: ");
+				
+				if (inputHeight.length() == 0) {
+					inputHeight = "null";
+				}
+				
+				if (inputHeight.length() > 5) {
+					JOptionPane.showMessageDialog(null, "Nombre demasiado largo");
+				}
+				
+				if (inputHeight.length() > 0 && inputHeight.length() < 5) {
+					break;
+				}
+
+			}while(true);
+			animal.setPeso(inputHeight);
+			z = 4;
+			BD[a][z] = inputHeight;
+			System.out.print(" | " + BD[a][z] + "Kg |" + "\n");
+			
+			int X = JOptionPane.showConfirmDialog(null, "¿Quieres añadir otro animal?");
+			
+			
+			System.out.println();
+			
+			s = a;
+			
+			if (X == 1 || X == 2 || X == -1) {
+				s++;
+				menu1();
+			}
+		}	
+	}
+}
