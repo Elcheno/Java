@@ -7,10 +7,13 @@ public class main {
 	static String[][] BD = new String[1000][5];
 	static String[] menu = {"SET", "GET", "EXIT"}; 
 	static String[] matriz = {"Perro", "Gato", "Cobaya", "Pingüino"};
+	static String[] getMenu = {"C1", "C2", "EXIT"};
 	
 	static int z;
 	static int s = 0;
 	static int a;
+	
+	static int get2;
 	
 	static int menuOption;
 	static String inputName;
@@ -33,11 +36,16 @@ public class main {
 				null, menu, menu[0]);
 		
 		if (menuOption == 2 || menuOption == -1) {
+			System.out.println(BD[0][1]);
 			System.exit(0);
 		}
 		
 		if (menuOption == 0) {
-			BD1();
+			set();
+		}
+		
+		if (menuOption == 1) {
+			get();
 		}
 		
 		return menuOption;	
@@ -45,7 +53,7 @@ public class main {
 	
 //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 	
-	public static void BD1() {
+	public static void set() {
 				
 		for (a = s;; a++) {
 			
@@ -72,6 +80,7 @@ public class main {
 				
 				if (inputName.length() == 0) {
 					inputName = "null";
+					break;
 				}
 				
 				if (inputName.length() > 15) {
@@ -81,6 +90,11 @@ public class main {
 				if (inputName.length() > 0 && inputName.length() < 5) {
 					break;
 				}
+				
+				if (inputName == null) {
+					menu1();
+				}
+				
 				
 				}while(true);
 			animal.setNombre(inputName);
@@ -94,6 +108,7 @@ public class main {
 				
 				if (inputAge.length() == 0) {
 					inputAge = "null";
+					break;
 				}
 				
 				if (inputAge.length() > 3) {
@@ -117,6 +132,7 @@ public class main {
 				
 				if (inputHeight.length() == 0) {
 					inputHeight = "null";
+					break;
 				}
 				
 				if (inputHeight.length() > 5) {
@@ -145,5 +161,34 @@ public class main {
 				menu1();
 			}
 		}	
+	}
+	
+//////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+	
+	public static int get() {
+		
+		int get1 = JOptionPane.showOptionDialog(null, "Tipo de sonsulta:", "CONSULTA", JOptionPane.DEFAULT_OPTION, JOptionPane.QUESTION_MESSAGE, null, getMenu, getMenu[0]);
+		
+		if (get1 == 2 || get1 == 2) {
+			menu1();
+		}
+		
+		if (get1 == 0) {
+			JOptionPane.showMessageDialog(null, "Este método de consulta exige el código del animal");
+			get2 = Integer.parseInt(JOptionPane.showInputDialog("Inserta el codigo del animal: "));
+			get01();
+		}
+		
+
+		if (get1 == 1) {
+			System.out.println("A JUANE LE GUSTAN LAS BARBIES");
+		}
+		
+		return get2;
+	}
+	
+	public static void get01() {
+		System.out.print("\n| " + BD[get2][0] + " | " + BD[get2][1] + " | " + BD[get2][2] + " | " + BD[get2][3] + " años | " + BD[get2][4] + "Kg |");
+		get();
 	}
 }
